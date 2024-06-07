@@ -1,9 +1,9 @@
 
 #include "../include/minitalk_bonus.h"
 
-void	confirm_message(int sig)
-{
-	if (sig == SIGUSR2)
+void	confirm(int signal)
+{	
+	if (signal == SIGUSR2)
 		ft_printf("message recieved\n");
 }
 
@@ -50,20 +50,21 @@ void	ft_ctob(int pid, char c)
 }
 
 int	main(int ac, char **av)
-{
+{	
 	int	pid;
 	int	i;
 
 	i = 0;
 	if (ac == 3)
-	{
+	{	
+		signal(SIGUSR2, &confirm);
 		pid = ft_atoi(av[1]);
 		while (av[2][i])
 		{
 			ft_ctob(pid, av[2][i]);
 			i++;
 		}
-		signal(SIGUSR2, confirm_message);
+		ft_ctob(pid, '\n');
 		ft_ctob(pid, '\0');
 	}
 	else

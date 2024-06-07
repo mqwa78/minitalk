@@ -57,6 +57,7 @@ int	main(int ac, char **av)
 			ft_ctob(pid, av[2][i]);
 			i++;
 		}
+		ft_ctob(pid, '\n');
 	}
 	else
 	{
